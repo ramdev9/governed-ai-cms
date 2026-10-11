@@ -80,7 +80,7 @@ Layers include:
    - `POST /api/finalize/:id`
 
 3. **Model Layer**  
-   Calls Gemini 2.5 Flash with `response_mime_type: "application/json"`.
+   Calls Gemini 3.8 Flash with `response_mime_type: "application/json"`.
 
 4. **Post-Processing Guardrails**  
    Ensures schema compliance and safe outputs.
@@ -144,7 +144,7 @@ Return:
 
 Clone repo:
 ```bash
-git clone https://github.com/rampm9/governed-ai-cms.git
+git clone https://github.com/ramdev9/governed-ai-cms.git
 cd governed-ai-cms
 ```
 
@@ -161,7 +161,7 @@ HF_TOKEN=hf_your_token_here
 JAIS_MODEL=inceptionai/jais-family-13b-chat
 ```
 
-`AGENT_PROVIDER=gemini` runs the three-agent loop (Generator, Critic, Refiner) on Gemini 2.5 Flash, using `GEMINI_API_KEY`. Set `AGENT_PROVIDER=jais` to use Jais instead.
+`AGENT_PROVIDER=gemini` runs the three-agent loop (Generator, Critic, Refiner) on Gemini 3.8 Flash, using `GEMINI_API_KEY`. Set `AGENT_PROVIDER=jais` to use Jais instead.
 
 `HF_TOKEN` is a Hugging Face read token for the Jais path. Jais chat weights are not on Hugging Face’s free serverless router. Point `HF_API_URL` at a dedicated Inference Endpoint when you have one. The public `api-inference.huggingface.co` host no longer resolves.
 
@@ -202,6 +202,16 @@ It documents tradeoffs such as:
 - Human trust metrics vs model confidence
 
 It is designed to be observable and auditable.
+
+---
+
+## 📚 Docs
+
+- [PRD — 2026 AI-Era Template](docs/12_PRD_2026_AI_Era_Template.md) ([PDF](docs/PRD_Governed_AI_CMS.pdf))
+- [Original MVP PRD](docs/01_Product_Requirements.md)
+- [Architecture Diagram](docs/Architecture_Diagram.png)
+- [AI Evaluation Plan](docs/06_AI_Evaluation_Plan.md) — see also the runnable eval set at [`server/evals/`](server/evals/)
+- Full doc set: [`docs/`](docs/)
 
 ---
 
