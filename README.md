@@ -7,6 +7,7 @@ This repository contains a production-style Arabic CMS prototype that goes beyon
 - deterministic validation
 - structured JSON enforcement
 - hybrid evaluation (rule-based + AI critique)
+- a 3-agent agentic refinement loop (Generator → Critic → Refiner → Critic again)
 - asynchronous critique pipelines
 - human override tracking
 - audit-ready lifecycle analysis
@@ -41,8 +42,12 @@ Basic AI integrations generate content, but lack:
 
 **Hybrid Evaluation**
 - Deterministic rule-based scoring
-- AI Critique (async, background)
+- AI Critique (async, background in simple mode; synchronous, run twice, in agentic mode)
 - Combined confidence metrics
+
+**Agentic Refinement Loop**
+- Generator → Critic → Refiner → Critic (re-scored)
+- Both drafts and both scores shown to the editor side by side
 
 **Human-in-the-Loop Governance**
 - Editor edits tracked
@@ -58,13 +63,18 @@ Basic AI integrations generate content, but lack:
 
 ## 🚀 Architecture
 
+The UI offers two generation modes, توليد بسيط (Simple) and توليد ذكي (Agentic):
+
 ```text
-Editor UI → Express API
-→ Structured Generation
-→ Deterministic Validation
-→ Deterministic Scoring
-→ Async AI Critique → Database
+Simple mode:
+Editor UI → Express API → Structured Generation → Deterministic Validation
+→ Deterministic Scoring → Async AI Critique → Database
 → Finalization w/ Override Tracking → Database
+
+Agentic mode (3-agent loop):
+Editor UI → Express API → Generator (draft v1) → Critic (score v1)
+→ Refiner (draft v2, addressing critic notes) → Critic (re-run, score v2)
+→ Database → Editor picks v1 or v2 → Finalization w/ Override Tracking
 ```
 
 Layers include:
@@ -119,6 +129,16 @@ override % = (changed words / total words) × 100
 ```
 
 Capturing editorial friction.
+
+### 🤖 Agentic Mode (3-Agent Loop)
+Toggle "توليد ذكي (3 وكلاء)" in the UI to run `POST /api/generate-agentic` instead of the simple path:
+
+1. **Generator** writes draft v1 from the topic.
+2. **Critic** scores v1 (1–10) with per-field feedback (headlines, body, SEO, tags, language) and a suggested-improvements list.
+3. **Refiner** rewrites the draft into v2, explicitly addressing each critic note, and writes its own `changes_summary`.
+4. **Critic runs again** against v2, so the "improved version" is backed by an actual score instead of just styling.
+
+The UI shows both drafts side by side with both scores, per-stage timings (`generation_ms`, `critique_ms`, `refinement_ms`, `critique_v2_ms`, `total_ms`), and the editor — not the system — picks which version to finalize via `POST /api/finalize/:id`.
 
 ### 🔍 Audit Endpoints
 Inspect completed critiques:
