@@ -13,6 +13,8 @@ This repository contains a production-style Arabic CMS prototype that goes beyon
 
 This is not a toy — it’s a governed, observable AI system.
 
+![UI Walkthrough](UI-Walkthrough.jpg)
+
 ---
 
 ## 📌 Motivation
