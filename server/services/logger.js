@@ -7,11 +7,13 @@ const db = new sqlite3.Database(dbPath);
 const AGENTIC_COLUMNS = [
     ["draft_v1", "TEXT"],
     ["draft_v2", "TEXT"],
+    ["critique_v2", "TEXT"],
     ["selected_version", "INTEGER"],
     ["final_body", "TEXT"],
     ["gen_time_ms", "INTEGER"],
     ["critique_time_ms", "INTEGER"],
     ["refine_time_ms", "INTEGER"],
+    ["critique_v2_time_ms", "INTEGER"],
     ["total_time_ms", "INTEGER"],
     ["finalized_at", "TEXT"]
 ];
@@ -119,21 +121,25 @@ module.exports.logAgenticGeneration = async function (record) {
             draft_v1,
             critique,
             draft_v2,
+            critique_v2,
             gen_time_ms,
             critique_time_ms,
             refine_time_ms,
+            critique_v2_time_ms,
             total_time_ms,
             critique_status
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'COMPLETE')`,
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'COMPLETE')`,
         [
             record.input,
             JSON.stringify(record.draftV2),
             JSON.stringify(record.draftV1),
             JSON.stringify(record.critique),
             JSON.stringify(record.draftV2),
+            JSON.stringify(record.critiqueV2),
             record.genTimeMs,
             record.critiqueTimeMs,
             record.refineTimeMs,
+            record.critiqueV2TimeMs,
             record.totalTimeMs
         ]
     );
@@ -144,8 +150,9 @@ module.exports.logAgenticGeneration = async function (record) {
 module.exports.getAgenticGeneration = async function (id) {
     await ready;
     return get(
-        `SELECT id, input, draft_v1, critique, draft_v2, selected_version, final_body,
-                created_at, finalized_at, gen_time_ms, critique_time_ms, refine_time_ms, total_time_ms
+        `SELECT id, input, draft_v1, critique, draft_v2, critique_v2, selected_version, final_body,
+                created_at, finalized_at, gen_time_ms, critique_time_ms, refine_time_ms,
+                critique_v2_time_ms, total_time_ms
          FROM generations WHERE id = ?`,
         [id]
     );

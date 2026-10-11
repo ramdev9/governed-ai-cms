@@ -52,6 +52,12 @@ router.post("/generate-agentic", async (req, res) => {
         timings.refinement = Date.now() - refineStart;
         console.log(`Refinement complete in ${timings.refinement}ms`);
 
+        console.log("Agent 2 (re-run): Critiquing refined draft...");
+        const critiqueV2Start = Date.now();
+        const critiqueV2Result = await critique(draftV2);
+        timings.critiqueV2 = Date.now() - critiqueV2Start;
+        console.log(`V2 critique complete in ${timings.critiqueV2}ms (Score: ${critiqueV2Result.overall_score}/10)`);
+
         timings.total = Date.now() - startTime;
 
         const id = await logAgenticGeneration({
@@ -59,9 +65,11 @@ router.post("/generate-agentic", async (req, res) => {
             draftV1,
             critique: critiqueResult,
             draftV2,
+            critiqueV2: critiqueV2Result,
             genTimeMs: timings.generation,
             critiqueTimeMs: timings.critique,
             refineTimeMs: timings.refinement,
+            critiqueV2TimeMs: timings.critiqueV2,
             totalTimeMs: timings.total
         });
 
@@ -71,6 +79,7 @@ router.post("/generate-agentic", async (req, res) => {
             draft_v1: draftV1,
             critique: critiqueResult,
             draft_v2: draftV2,
+            critique_v2: critiqueV2Result,
             metadata: {
                 model: agentRuntime().model,
                 provider: agentRuntime().provider,
@@ -78,6 +87,7 @@ router.post("/generate-agentic", async (req, res) => {
                     generation_ms: timings.generation,
                     critique_ms: timings.critique,
                     refinement_ms: timings.refinement,
+                    critique_v2_ms: timings.critiqueV2,
                     total_ms: timings.total
                 }
             }
@@ -106,6 +116,7 @@ router.get("/generation/:id", async (req, res) => {
             draft_v1: parseStoredJson(row.draft_v1),
             critique: parseStoredJson(row.critique),
             draft_v2: parseStoredJson(row.draft_v2),
+            critique_v2: parseStoredJson(row.critique_v2),
             selected_version: row.selected_version,
             final_body: row.final_body,
             created_at: row.created_at,
@@ -114,6 +125,7 @@ router.get("/generation/:id", async (req, res) => {
                 generation_ms: row.gen_time_ms,
                 critique_ms: row.critique_time_ms,
                 refinement_ms: row.refine_time_ms,
+                critique_v2_ms: row.critique_v2_time_ms,
                 total_ms: row.total_time_ms
             }
         });

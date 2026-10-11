@@ -290,6 +290,10 @@ async function generateAgentic(input) {
         ["generator", "critic", "refiner"].forEach(markAgentDone);
 
         document.getElementById("critique-score").textContent = data.critique.overall_score;
+        document.getElementById("v1-score").textContent = `${data.critique.overall_score}/10`;
+        document.getElementById("v2-score").textContent = data.critique_v2
+            ? `${data.critique_v2.overall_score}/10`
+            : "-";
         document.getElementById("critique-headlines").textContent = data.critique.headline_feedback || "-";
         document.getElementById("critique-body").textContent = data.critique.body_feedback || "-";
         document.getElementById("critique-seo").textContent = data.critique.seo_feedback || "-";
@@ -313,6 +317,7 @@ async function generateAgentic(input) {
         document.getElementById("time-gen").textContent = data.metadata.timings.generation_ms;
         document.getElementById("time-critique").textContent = data.metadata.timings.critique_ms;
         document.getElementById("time-refine").textContent = data.metadata.timings.refinement_ms;
+        document.getElementById("time-critique2").textContent = data.metadata.timings.critique_v2_ms;
         document.getElementById("time-total").textContent = data.metadata.timings.total_ms;
 
         comparison.classList.remove("hidden");

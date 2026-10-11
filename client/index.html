@@ -97,7 +97,10 @@
             <div class="draft-column draft-v1">
                 <div class="draft-header">
                     <h3>المسودة الأولى</h3>
-                    <span class="version-badge">V1</span>
+                    <span class="header-badges">
+                        <span class="version-badge">V1</span>
+                        <span id="v1-score" class="score-badge score-badge-sm">-</span>
+                    </span>
                 </div>
                 <div id="draft-v1-content" class="draft-content"></div>
                 <button class="select-btn" type="button" data-version="1">اختر هذه النسخة</button>
@@ -106,7 +109,10 @@
             <div class="draft-column draft-v2">
                 <div class="draft-header">
                     <h3>النسخة المحسّنة ✨</h3>
-                    <span class="version-badge v2">V2</span>
+                    <span class="header-badges">
+                        <span class="version-badge v2">V2</span>
+                        <span id="v2-score" class="score-badge score-badge-sm">-</span>
+                    </span>
                 </div>
                 <div id="draft-v2-content" class="draft-content"></div>
                 <div id="changes-summary" class="changes-summary"></div>
@@ -118,6 +124,7 @@
             <span>التوليد: <strong id="time-gen">-</strong>ms</span>
             <span>النقد: <strong id="time-critique">-</strong>ms</span>
             <span>التحسين: <strong id="time-refine">-</strong>ms</span>
+            <span>إعادة التقييم: <strong id="time-critique2">-</strong>ms</span>
             <span>الإجمالي: <strong id="time-total">-</strong>ms</span>
         </div>
 

@@ -335,6 +335,17 @@ button:disabled {
   background: #22c55e;
 }
 
+.header-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.score-badge-sm {
+  padding: 2px 8px;
+  font-size: 12px;
+}
+
 .draft-content {
   min-height: 180px;
   padding: 15px;
