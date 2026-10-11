@@ -209,7 +209,7 @@ It is designed to be observable and auditable.
 
 - [PRD — 2026 AI-Era Template](docs/12_PRD_2026_AI_Era_Template.md) ([PDF](docs/PRD_Governed_AI_CMS.pdf))
 - [Original MVP PRD](docs/01_Product_Requirements.md)
-- [Architecture Diagram](docs/Architecture_Diagram.png)
+- [Architecture Diagram](docs/Architecture_Diagram.png) — source of truth: [Figma board](https://www.figma.com/board/vUqbsYK5oW3Lausxxj3ZCi/Arabic-AI-CMS-Architecture)
 - [AI Evaluation Plan](docs/06_AI_Evaluation_Plan.md) — see also the runnable eval set at [`server/evals/`](server/evals/)
 - Full doc set: [`docs/`](docs/)
 

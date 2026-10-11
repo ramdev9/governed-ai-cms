@@ -27,7 +27,7 @@ Running locally, not yet deployed to a shared URL:
 http://localhost:5001 — Express API + static client, no auth layer yet
 ```
 
-See [`Architecture_Diagram.png`](./Architecture_Diagram.png) for the full request/response flow.
+See [`Architecture_Diagram.png`](./Architecture_Diagram.png) for the full request/response flow — exported from the source-of-truth [Figma board](https://www.figma.com/board/vUqbsYK5oW3Lausxxj3ZCi/Arabic-AI-CMS-Architecture), which also documents the `generations` table schema in detail.
 
 ## 4. Features & How They Work `TIMELESS`
 
