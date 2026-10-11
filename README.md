@@ -73,8 +73,11 @@ Layers include:
 2. **Backend API (Node + Express)**  
    Endpoints:
    - `POST /api/generate`
-   - `GET /api/audit/:id`
+   - `GET /api/generate/audit/:id`
    - `POST /api/generate/finalize/:id`
+   - `POST /api/generate-agentic`
+   - `GET /api/generation/:id`
+   - `POST /api/finalize/:id`
 
 3. **Model Layer**  
    Calls Gemini 2.5 Flash with `response_mime_type: "application/json"`.
@@ -154,7 +157,13 @@ Create `.env`:
 ```text
 GEMINI_API_KEY=your_api_key_here
 PORT=5001
+HF_TOKEN=hf_your_token_here
+JAIS_MODEL=inceptionai/jais-family-13b-chat
 ```
+
+`AGENT_PROVIDER=gemini` runs the three-agent loop (Generator, Critic, Refiner) on Gemini 2.5 Flash, using `GEMINI_API_KEY`. Set `AGENT_PROVIDER=jais` to use Jais instead.
+
+`HF_TOKEN` is a Hugging Face read token for the Jais path. Jais chat weights are not on Hugging Face’s free serverless router. Point `HF_API_URL` at a dedicated Inference Endpoint when you have one. The public `api-inference.huggingface.co` host no longer resolves.
 
 Run server:
 ```bash

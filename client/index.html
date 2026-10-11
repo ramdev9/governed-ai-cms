@@ -15,14 +15,114 @@
         <textarea id="inputText" placeholder="أدخل عنوان أو فكرة المقال هنا"></textarea>
         <div class="controls">
             <span id="charCount">0 characters</span>
-            <button id="generateBtn">Generate</button>
+            <button id="generateBtn" type="button">Generate</button>
         </div>
+
+        <div class="mode-selector" dir="rtl">
+            <label class="mode-option">
+                <input type="radio" name="mode" value="simple" checked>
+                <span>توليد بسيط</span>
+            </label>
+            <label class="mode-option">
+                <input type="radio" name="mode" value="agentic">
+                <span>توليد ذكي (3 وكلاء) ✨</span>
+            </label>
+        </div>
+
         <div id="errorMessage" class="error"></div>
     </div>
 
-    <div id="loading" class="loading hidden">Generating...</div>
+    <div id="loading" class="loading hidden">
+        <span class="spinner"></span>
+        <span>Generating...</span>
+    </div>
+
+    <div id="agent-progress" class="agent-progress hidden" dir="rtl">
+        <div class="agent-step" id="step-generator">
+            <div class="agent-icon">🤖</div>
+            <div class="agent-name">المولّد</div>
+            <div class="agent-status">⏳</div>
+        </div>
+        <div class="agent-arrow">←</div>
+        <div class="agent-step" id="step-critic">
+            <div class="agent-icon">🔍</div>
+            <div class="agent-name">الناقد</div>
+            <div class="agent-status">⏳</div>
+        </div>
+        <div class="agent-arrow">←</div>
+        <div class="agent-step" id="step-refiner">
+            <div class="agent-icon">✨</div>
+            <div class="agent-name">المحسّن</div>
+            <div class="agent-status">⏳</div>
+        </div>
+    </div>
 
     <div id="metricsPanel" class="metrics hidden"></div>
+
+    <div id="comparison-view" class="comparison-view hidden" dir="rtl">
+        <div class="critique-panel">
+                    <h3>📋 ملاحظات الناقد</h3>
+            <div class="critique-score">
+                التقييم: <span id="critique-score" class="score-badge">-</span>/10
+            </div>
+            <div class="critique-details">
+                <div class="critique-item">
+                    <strong>العناوين:</strong>
+                    <span id="critique-headlines"></span>
+                </div>
+                <div class="critique-item">
+                    <strong>المتن:</strong>
+                    <span id="critique-body"></span>
+                </div>
+                <div class="critique-item">
+                    <strong>SEO:</strong>
+                    <span id="critique-seo"></span>
+                </div>
+                <div class="critique-item">
+                    <strong>الوسوم:</strong>
+                    <span id="critique-tags"></span>
+                </div>
+                <div class="critique-item">
+                    <strong>اللغة:</strong>
+                    <span id="critique-language"></span>
+                </div>
+            </div>
+            <div class="improvements">
+                <strong>التحسينات المقترحة:</strong>
+                <ul id="improvements-list"></ul>
+            </div>
+        </div>
+
+        <div class="drafts-comparison">
+            <div class="draft-column draft-v1">
+                <div class="draft-header">
+                    <h3>المسودة الأولى</h3>
+                    <span class="version-badge">V1</span>
+                </div>
+                <div id="draft-v1-content" class="draft-content"></div>
+                <button class="select-btn" type="button" data-version="1">اختر هذه النسخة</button>
+            </div>
+
+            <div class="draft-column draft-v2">
+                <div class="draft-header">
+                    <h3>النسخة المحسّنة ✨</h3>
+                    <span class="version-badge v2">V2</span>
+                </div>
+                <div id="draft-v2-content" class="draft-content"></div>
+                <div id="changes-summary" class="changes-summary"></div>
+                <button class="select-btn primary" type="button" data-version="2">اختر هذه النسخة</button>
+            </div>
+        </div>
+
+        <div class="timing-panel">
+            <span>التوليد: <strong id="time-gen">-</strong>ms</span>
+            <span>النقد: <strong id="time-critique">-</strong>ms</span>
+            <span>التحسين: <strong id="time-refine">-</strong>ms</span>
+            <span>الإجمالي: <strong id="time-total">-</strong>ms</span>
+        </div>
+
+        <div id="finalizeStatus" class="finalize-status"></div>
+    </div>
 
     <div id="output"></div>
 

@@ -1,0 +1,32 @@
+{
+  "description": "20-item eval set referenced in the PRD (section 5: Success Measurement & Evals). Each input is a real editorial-style Arabic topic; `expected` encodes the same structural rules the server enforces in postProcessor.js and evaluator.js, so pass/fail can be checked by anyone without an editor in the loop.",
+  "schemaRules": {
+    "headlinesCount": 3,
+    "tagsCount": 5,
+    "bodyWordRange": [350, 650],
+    "slugPattern": "^[\\u0600-\\u06FF]+(-[\\u0600-\\u06FF]+)*$",
+    "seoDescriptionMaxChars": 160
+  },
+  "cases": [
+    { "id": 1, "category": "Politics", "input": "اجتماع وزراء الخارجية الخليجيين لبحث التعاون الأمني المشترك" },
+    { "id": 2, "category": "Politics", "input": "مباحثات ثنائية بين الإمارات وفرنسا حول الشراكة الاستراتيجية" },
+    { "id": 3, "category": "Politics", "input": "قمة إقليمية لمناقشة ملفات الاستقرار في الشرق الأوسط" },
+    { "id": 4, "category": "Politics", "input": "مجلس الوزراء يعتمد حزمة تشريعات جديدة لتنظيم العمل الحكومي الرقمي" },
+    { "id": 5, "category": "Politics", "input": "زيارة رسمية لوفد دبلوماسي لبحث تعزيز العلاقات الثنائية" },
+    { "id": 6, "category": "Economy", "input": "ارتفاع مؤشر سوق دبي المالي بدعم من قطاع العقارات" },
+    { "id": 7, "category": "Economy", "input": "البنك المركزي يصدر تقريره الفصلي حول النمو الاقتصادي" },
+    { "id": 8, "category": "Economy", "input": "إطلاق صندوق استثماري جديد لدعم الشركات الناشئة في المنطقة" },
+    { "id": 9, "category": "Economy", "input": "ارتفاع أسعار النفط العالمية وتأثيره على موازنات دول الخليج" },
+    { "id": 10, "category": "Economy", "input": "توقيع اتفاقية تجارة حرة بين الإمارات وشريك اقتصادي جديد" },
+    { "id": 11, "category": "Technology", "input": "إطلاق مبادرة وطنية لتسريع تبني تقنيات الذكاء الاصطناعي" },
+    { "id": 12, "category": "Technology", "input": "شركة تقنية إماراتية تطلق منصة سحابية جديدة للشركات الصغيرة" },
+    { "id": 13, "category": "Technology", "input": "توسع استخدام الروبوتات في القطاع الصناعي بدولة الإمارات" },
+    { "id": 14, "category": "Technology", "input": "إطلاق تطبيق ذكي لإدارة النقل العام في المدن الكبرى" },
+    { "id": 15, "category": "Technology", "input": "استثمارات جديدة في مراكز البيانات والحوسبة السحابية بالمنطقة" },
+    { "id": 16, "category": "Sports", "input": "المنتخب الوطني يستعد لمواجهة حاسمة في تصفيات كأس العالم" },
+    { "id": 17, "category": "Sports", "input": "نادي محلي يتعاقد مع مدرب جديد قبل انطلاق الموسم" },
+    { "id": 18, "category": "Sports", "input": "بطولة إقليمية لألعاب القوى تستضيفها دولة الإمارات" },
+    { "id": 19, "category": "Sports", "input": "لاعب شاب يحقق إنجازاً بارزاً في بطولة دولية للسباحة" },
+    { "id": 20, "category": "Sports", "input": "افتتاح أكاديمية رياضية جديدة لتأهيل المواهب الشابة" }
+  ]
+}
